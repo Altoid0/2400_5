@@ -27,7 +27,7 @@ public interface GraphAlgorithmsInterface<T> {
     the label of the destination vertex is at the bottom
     @return The length of the shortest path. */
     public int getShortestPath(T begin, T end, StackInterface<T> path);
-    
+
     /** Finds the least-cost path between two given vertices in this graph.
     @param begin An object that labels the path's origin vertex.
     @param end An object that labels the path's destination vertex.
