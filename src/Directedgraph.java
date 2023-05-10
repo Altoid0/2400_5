@@ -154,7 +154,12 @@ public class Directedgraph<T> implements GraphInterface<T> {
             vertex = vertex.getPredecessor();
             path.push(vertex.getLabel());
         } // end while
-        return pathLength;
+        if (!path.isEmpty()) {
+            return pathLength;
+        } else {
+            return -1; // no path found
+        }
+        
     }
 
     public double getCheapestPath(T begin, T end, StackInterface<T> path) {
@@ -194,7 +199,11 @@ public class Directedgraph<T> implements GraphInterface<T> {
             vertex = vertex.getPredecessor();
             path.push(vertex.getLabel());
         }
-        return pathCost;
+        if (!path.isEmpty()) {
+            return pathCost;
+        } else {
+            return -1; // no path found
+        }
     }
 
     protected void resetVertices() {
