@@ -20,7 +20,10 @@ public class Directedgraph<T> implements GraphInterface<T> {
         VertexInterface<T> endVertex = vertices.getValue(end);
         if ((beginVertex != null) && (endVertex != null)) {
             result = beginVertex.connect(endVertex, edgeWeight);
+        } else {
+            throw new IllegalArgumentException("One or both of the vertices are not valid.");
         }
+
         if (result) {
             edgeCount++;
         }
