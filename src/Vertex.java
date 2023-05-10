@@ -133,9 +133,10 @@ public class Vertex<T> implements VertexInterface<T> {
             return nextNeighbor;
         }
         
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
+        // public void remove() {
+        //     edgeList.remove();
+        //     //throw new UnsupportedOperationException();
+        // }
     }
 
     private class WeightIterator implements Iterator<Double> {

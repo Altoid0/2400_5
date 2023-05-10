@@ -49,6 +49,26 @@ public class Directedgraph<T> implements GraphInterface<T> {
         }
         return found;
     }
+
+    public boolean removeEdge(T begin, T end) {
+        boolean result = false;
+        VertexInterface<T> beginVertex = vertices.getValue(begin);
+        VertexInterface<T> endVertex = vertices.getValue(end);
+        if ((beginVertex != null) && (endVertex != null)) {
+            Iterator<VertexInterface<T>> neighbors = beginVertex.getNeighborIterator();
+            while (!result && neighbors.hasNext()) {
+                VertexInterface<T> nextNeighbor = neighbors.next();
+                if (endVertex.equals(nextNeighbor)) {
+                    neighbors.remove(); // TODO: in order for this to wrk properly, you need to implement the remove() method in the NeighborIterator class
+                    result = true;
+                }
+            }
+        }
+        if (result) {
+            edgeCount--;
+        }
+        return result;
+    }
     
     public boolean isEmpty() {
         return vertices.isEmpty();
@@ -125,7 +145,6 @@ public class Directedgraph<T> implements GraphInterface<T> {
     }
 
     public int getShortestPath(T begin, T end, StackInterface<T> path) {
-        // TODO: Queue is empty and done is false or stack is empty, can return a 0
         resetVertices();
         boolean done = false;
         QueueInterface<VertexInterface<T>> vertexQueue = new Queue<>();
