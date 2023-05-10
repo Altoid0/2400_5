@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.lang.UnsupportedOperationException;
 
-public class LinkedListWithIterator<T> {
+public class LinkedListWithIterator<T> implements ListWithIteratorInterface<T>{
     private Node firstNode;
     private int size;
     
@@ -100,6 +100,10 @@ public class LinkedListWithIterator<T> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public Iterator<T> getIterator() {
+        return new IteratorForLinkedList();
     }
 
 

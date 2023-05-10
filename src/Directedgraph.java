@@ -122,6 +122,7 @@ public class Directedgraph<T> implements GraphInterface<T> {
     }
 
     public int getShortestPath(T begin, T end, StackInterface<T> path) {
+        // TODO: Queue is empty and done is false or stack is empty, can return a 0
         resetVertices();
         boolean done = false;
         PriorityQueueInterface<VertexInterface<T>> vertexQueue = new MinHeapPriorityQueue<>(); // TODO: what's wrong here? Isn't this supposed to be a priority queue?

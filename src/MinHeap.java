@@ -134,7 +134,7 @@ public final class MinHeap<T extends Comparable<? super T>> implements MinHeapIn
         lastIndex = 0;
     }
 
-    public void showHeap(int rootIndex) {
+    public void showHeap(int rootIndex) { // TODO: Show the queue, heapsort with new array sort it with Collections.sort and return it all the way to Directed Graph, which casts to EntryPQ
         int left = 2 * rootIndex;
         int right = 2 * rootIndex + 1;
 
