@@ -125,7 +125,7 @@ public class Directedgraph<T> implements GraphInterface<T> {
         // TODO: Queue is empty and done is false or stack is empty, can return a 0
         resetVertices();
         boolean done = false;
-        PriorityQueueInterface<VertexInterface<T>> vertexQueue = new MinHeapPriorityQueue<>(); // TODO: what's wrong here? Isn't this supposed to be a priority queue?
+        QueueInterface<VertexInterface<T>> vertexQueue = new Queue<>(); // TODO: what's wrong here? Isn't this supposed to be a priority queue?
         VertexInterface<T> originVertex = vertices.getValue(begin);
         VertexInterface<T> endVertex = vertices.getValue(end);
         originVertex.visit();

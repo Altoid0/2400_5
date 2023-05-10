@@ -64,7 +64,8 @@ public class Vertex<T> implements VertexInterface<T> {
     }
     
     public boolean hasNeighbor() {
-        return !edgeList.isEmpty(); //TODO: Add isEmpty() to ListWithIteratorInterface? or nah?
+        throw new UnsupportedOperationException("Not supported.");
+        //return !edgeList.isEmpty(); //TODO: Add isEmpty() to ListWithIteratorInterface? or nah?
     }
     
     public VertexInterface<T> getUnvisitedNeighbor() {
