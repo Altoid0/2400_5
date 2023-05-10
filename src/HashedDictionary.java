@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 
 public class HashedDictionary <K,V> implements DictionaryInterface<K,V> {
     private int numberOfEntries;
-    private static final int DEFAULT_CAPACITY = 5;
+    private static final int DEFAULT_CAPACITY = 137;
     private static final int MAX_CAPACITY = 10000;
     private Entry<K,V>[] hashTable;
     private int tableSize;
