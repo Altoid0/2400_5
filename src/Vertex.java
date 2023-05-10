@@ -10,7 +10,7 @@ public class Vertex<T> implements VertexInterface<T> {
     
     public Vertex(T vertexLabel) {
         label = vertexLabel;
-        edgeList = new LinkedListWithIterator<>(); // TODO: Ask why this happens and how to fix it
+        edgeList = new LinkedListWithIterator<>();
         visited = false;
         previousVertex = null;
         cost = 0;
@@ -64,8 +64,7 @@ public class Vertex<T> implements VertexInterface<T> {
     }
     
     public boolean hasNeighbor() {
-        throw new UnsupportedOperationException("Not supported.");
-        //return !edgeList.isEmpty(); //TODO: Add isEmpty() to ListWithIteratorInterface? or nah?
+        return !edgeList.isEmpty();
     }
     
     public VertexInterface<T> getUnvisitedNeighbor() {

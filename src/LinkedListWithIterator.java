@@ -90,6 +90,24 @@ public class LinkedListWithIterator<T> implements ListWithIteratorInterface<T>{
         }
     }
 
+    public boolean contains(T anEntry) {
+        boolean found = false;
+        Node currentNode = firstNode;
+        while (!found && (currentNode != null)) {
+            if (anEntry.equals(currentNode.getData())) {
+                found = true;
+            }
+            else {
+                currentNode = currentNode.getNextNode();
+            }
+        }
+        return found;
+    }
+
+    public int getLength() {
+        return size;
+    }
+
     private Node getNodeAt(int givenPosition) {
         Node currentNode = firstNode;
         for (int counter = 1; counter < givenPosition; counter++) {

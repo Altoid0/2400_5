@@ -89,7 +89,7 @@ public class Directedgraph<T> implements GraphInterface<T> {
 
     public QueueInterface<T> getDepthFirstTraversal(T origin) {
         resetVertices();
-        QueueInterface<T> traversalOrder = new Queue<>(); // TODO: Is this supposed to be a priority queue?
+        QueueInterface<T> traversalOrder = new Queue<>();
         StackInterface<VertexInterface<T>> vertexStack = new LinkedStack<>();
         VertexInterface<T> originVertex = vertices.getValue(origin);
         originVertex.visit();
@@ -125,7 +125,7 @@ public class Directedgraph<T> implements GraphInterface<T> {
         // TODO: Queue is empty and done is false or stack is empty, can return a 0
         resetVertices();
         boolean done = false;
-        QueueInterface<VertexInterface<T>> vertexQueue = new Queue<>(); // TODO: what's wrong here? Isn't this supposed to be a priority queue?
+        QueueInterface<VertexInterface<T>> vertexQueue = new Queue<>();
         VertexInterface<T> originVertex = vertices.getValue(begin);
         VertexInterface<T> endVertex = vertices.getValue(end);
         originVertex.visit();
@@ -163,9 +163,9 @@ public class Directedgraph<T> implements GraphInterface<T> {
         PriorityQueueInterface<EntryPQ> priorityQueue = new MinHeapPriorityQueue<>();
         VertexInterface<T> originVertex = vertices.getValue(begin);
         VertexInterface<T> endVertex = vertices.getValue(end);
-        priorityQueue.enqueue(new EntryPQ(originVertex, 0, null));
+        priorityQueue.add(new EntryPQ(originVertex, 0, null));
         while (!done && !priorityQueue.isEmpty()) {
-            EntryPQ frontEntry = priorityQueue.dequeue();
+            EntryPQ frontEntry = priorityQueue.remove();
             VertexInterface<T> frontVertex = frontEntry.getVertex();
             if (!frontVertex.isVisited()) {
                 frontVertex.visit();
@@ -181,7 +181,7 @@ public class Directedgraph<T> implements GraphInterface<T> {
                         Double weightOfEdgeToNeighbor = edgeWeights.next();
                         if (!nextNeighbor.isVisited()) {
                             double nextCost = weightOfEdgeToNeighbor + frontVertex.getCost();
-                            priorityQueue.enqueue(new EntryPQ(nextNeighbor, nextCost, frontVertex));
+                            priorityQueue.add(new EntryPQ(nextNeighbor, nextCost, frontVertex));
                         }
                     }
                 }
