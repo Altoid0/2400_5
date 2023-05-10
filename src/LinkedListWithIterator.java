@@ -106,6 +106,33 @@ public class LinkedListWithIterator<T> implements ListWithIteratorInterface<T>{
         return new IteratorForLinkedList();
     }
 
+    private class IteratorForLinkedList implements Iterator<T> {
+        private Node nextNode;
+        
+        private IteratorForLinkedList() {
+            nextNode = firstNode;
+        }
+        
+        public boolean hasNext() {
+            return nextNode != null;
+        }
+        
+        public T next() {
+            if (hasNext()) {
+                Node returnNode = nextNode;
+                nextNode = nextNode.getNextNode();
+                return returnNode.getData();
+            }
+            else {
+                throw new java.util.NoSuchElementException("Illegal call to next(); iterator is after end of list.");
+            }
+        }
+        
+        public void remove() {
+            throw new UnsupportedOperationException("remove() is not supported by this iterator.");
+        }
+    }
+
 
     private class Node {
         private T data;
