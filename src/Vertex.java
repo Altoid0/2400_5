@@ -55,6 +55,18 @@ public class Vertex<T> implements VertexInterface<T> {
         return connect(endVertex, 0);
     }
     
+    public boolean disconnect(VertexInterface<T> endVertex) {
+        boolean result = false;
+        int size = edgeList.getLength();
+        for (int i = 1; i <= size; i++) {
+            if (endVertex.equals(edgeList.getEntry(i).getEndVertex())) {
+                edgeList.remove(i);
+                result = true;
+            }
+        }
+        return result;
+    }
+
     public Iterator<VertexInterface<T>> getNeighborIterator() {
         return new NeighborIterator();
     }

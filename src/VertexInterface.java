@@ -30,6 +30,14 @@ public interface VertexInterface<T> {
     @param endVertex A vertex in the graph that ends the edge.
     @return True if the edge is added, or false if not. */
     public boolean connect(VertexInterface<T> endVertex);
+
+    /** Disconnects this vertex and a given vertex.
+     * The two vertices cannot be the same, and must
+     * already have this edge between them. In a directed
+     * graph, the edge points toward the given vertex.
+     * @param endVertex A vertex in the graph that ends the edge.
+     * @return True if the edge is removed, or false if not. */
+    public boolean disconnect(VertexInterface<T> endVertex);
     
     /** Creates an iterator of this vertex's neighbors by following
     all edges that begin at this vertex.

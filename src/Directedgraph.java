@@ -55,14 +55,7 @@ public class Directedgraph<T> implements GraphInterface<T> {
         VertexInterface<T> beginVertex = vertices.getValue(begin);
         VertexInterface<T> endVertex = vertices.getValue(end);
         if ((beginVertex != null) && (endVertex != null)) {
-            Iterator<VertexInterface<T>> neighbors = beginVertex.getNeighborIterator();
-            while (!result && neighbors.hasNext()) {
-                VertexInterface<T> nextNeighbor = neighbors.next();
-                if (endVertex.equals(nextNeighbor)) {
-                    neighbors.remove(); // TODO: in order for this to wrk properly, you need to implement the remove() method in the NeighborIterator class
-                    result = true;
-                }
-            }
+            result = beginVertex.disconnect(endVertex);
         }
         if (result) {
             edgeCount--;
