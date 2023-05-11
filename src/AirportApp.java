@@ -31,7 +31,7 @@ public class AirportApp {
         Scanner distances = new Scanner(distancesFile);
     
 
-        DictionaryInterface<String,String> airportDict = new HashedDictionary<>(); // TODO is this right?
+        DictionaryInterface<String,String> airportDict = new HashedDictionary<>();
         GraphInterface<String> airportGraph = new DirectedGraph<>();
 
         String[] airportArray;
@@ -76,16 +76,26 @@ public class AirportApp {
                     System.out.print("Airport codes: ");
                     String[] iatas = input.nextLine().split(" ");
                     StackInterface<String> path = new LinkedStack<>();
-                    System.out.println("The minimum distance between " + airportDict.getValue(iatas[0]) + " and " + airportDict.getValue(iatas[1]) + " is " + airportGraph.getCheapestPath(iatas[0], iatas[1], path) + " through the route:");
-                    while (!path.isEmpty()) {
-                        System.out.println(airportDict.getValue(path.pop()));
+                    Double cost = airportGraph.getCheapestPath(iatas[0], iatas[1], path);
+                    if (cost != -1) {
+                        System.out.println("The minimum distance between " + airportDict.getValue(iatas[0]) + " and " + airportDict.getValue(iatas[1]) + " is " + cost + " through the route:");
+                        while (!path.isEmpty()) {
+                            System.out.println(airportDict.getValue(path.pop()));
+                        }
+                    } else {
+                        System.out.println("There is no path between " + airportDict.getValue(iatas[0]) + " and " + airportDict.getValue(iatas[1]) + ".");
                     }
+                    
                     break;
                 case "I":
                     System.out.print("Airport codes and distance: ");
                     String[] iataDistance = input.nextLine().split(" ");
-                    airportGraph.addEdge(iataDistance[0], iataDistance[1], Double.parseDouble(iataDistance[2])); // TODO add in error handling here
-                    System.out.println("You have inserted a flight from " + airportDict.getValue(iataDistance[0]) + " to " + airportDict.getValue(iataDistance[1]) + " with a distance of " + iataDistance[2] + ".");
+                    if (!airportGraph.hasEdge(iataDistance[0], iataDistance[1])) {
+                        airportGraph.addEdge(iataDistance[0], iataDistance[1], Double.parseDouble(iataDistance[2])); // TODO add in error handling here
+                        System.out.println("You have inserted a flight from " + airportDict.getValue(iataDistance[0]) + " to " + airportDict.getValue(iataDistance[1]) + " with a distance of " + iataDistance[2] + ".");
+                    } else {
+                        System.out.println("The connection from " + airportDict.getValue(iataDistance[0]) + " to " + airportDict.getValue(iataDistance[1]) + " already exists.");
+                    }
                     break;
                 case "R":
                     System.out.print("Airport codes: ");

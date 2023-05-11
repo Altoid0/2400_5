@@ -15,7 +15,7 @@ public class DirectedGraph<T> implements GraphInterface<T> {
         return addOutcome == null;
     }
     
-    public boolean addEdge(T begin, T end, double edgeWeight) {
+    public boolean addEdge(T begin, T end, double edgeWeight) { // TODO check to see if the edge already exists and if it does then throw a new exception
         boolean result = false;
         VertexInterface<T> beginVertex = vertices.getValue(begin);
         VertexInterface<T> endVertex = vertices.getValue(end);
@@ -43,6 +43,7 @@ public class DirectedGraph<T> implements GraphInterface<T> {
             Iterator<VertexInterface<T>> neighbors = beginVertex.getNeighborIterator();
             while (!found && neighbors.hasNext()) {
                 VertexInterface<T> nextNeighbor = neighbors.next();
+                //System.out.println("DEBUG: next neighbor: " + nextNeighbor.getLabel());
                 if (endVertex.equals(nextNeighbor)) {
                     found = true;
                 }
@@ -170,7 +171,7 @@ public class DirectedGraph<T> implements GraphInterface<T> {
             vertex = vertex.getPredecessor();
             path.push(vertex.getLabel());
         } // end while
-        if (!path.isEmpty()) {
+        if (!path.isEmpty() && pathLength != 0) {
             return pathLength;
         } else {
             return -1; // no path found
@@ -215,7 +216,7 @@ public class DirectedGraph<T> implements GraphInterface<T> {
             vertex = vertex.getPredecessor();
             path.push(vertex.getLabel());
         }
-        if (!path.isEmpty()) {
+        if (!path.isEmpty() && pathCost != 0.0) {
             return pathCost;
         } else {
             return -1; // no path found
