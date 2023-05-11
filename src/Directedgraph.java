@@ -1,10 +1,11 @@
 import java.util.Iterator;
 
-public class Directedgraph<T> implements GraphInterface<T> {
+public class DirectedGraph<T> implements GraphInterface<T> {
+        
     private DictionaryInterface<T, VertexInterface<T>> vertices;
     private int edgeCount;
     
-    public Directedgraph() {
+    public DirectedGraph() {
         vertices = new HashedDictionary<>();
         edgeCount = 0;
     }
