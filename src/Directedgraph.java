@@ -223,13 +223,20 @@ public class DirectedGraph<T> implements GraphInterface<T> {
     }
 
     protected void resetVertices() {
-        Iterator<VertexInterface<T>> vertexIterator = vertices.getValueIterator();
+        Iterator<T> vertexIterator = vertices.getKeyIterator();
         while (vertexIterator.hasNext()) {
-            VertexInterface<T> nextVertex = vertexIterator.next();
+            VertexInterface<T> nextVertex = vertices.getValue(vertexIterator.next());
             nextVertex.unvisit();
             nextVertex.setCost(0);
             nextVertex.setPredecessor(null);
         }
+        // Iterator<VertexInterface<T>> vertexIterator = vertices.getValueIterator();
+        // while (vertexIterator.hasNext()) {
+        //     VertexInterface<T> nextVertex = vertexIterator.next();
+        //     nextVertex.unvisit();
+        //     nextVertex.setCost(0);
+        //     nextVertex.setPredecessor(null);
+        // }
     }
 
     protected VertexInterface<T> findTerminal() {

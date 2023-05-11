@@ -55,7 +55,7 @@ public class AirportApp {
 
 
 
-        System.out.println("Command? ");
+        System.out.print("Command? ");
         String command = input.nextLine();
         while (!command.equals("E")) {
             switch (command) {
@@ -68,33 +68,33 @@ public class AirportApp {
                     System.out.println("E Exit.");
                     break;
                 case "Q":
-                    System.out.println("Airport code: ");
+                    System.out.print("Airport code: ");
                     String iata = input.nextLine();
                     System.out.println("Airport information: " + airportDict.getValue(iata.toUpperCase()));
                     break;
                 case "D":
-                    System.out.println("Airport codes: ");
+                    System.out.print("Airport codes: ");
                     String[] iatas = input.nextLine().split(" ");
                     StackInterface<String> path = new LinkedStack<>();
-                    System.out.println("The minimum distance between " + iatas[0] + " and " + iatas[1] + " is " + airportGraph.getCheapestPath(iatas[0], iatas[1], path) + " through the route:");
+                    System.out.println("The minimum distance between " + airportDict.getValue(iatas[0]) + " and " + airportDict.getValue(iatas[1]) + " is " + airportGraph.getCheapestPath(iatas[0], iatas[1], path) + " through the route:");
                     while (!path.isEmpty()) {
-                        System.out.println(path.pop());
+                        System.out.println(airportDict.getValue(path.pop()));
                     }
                     break;
                 case "I":
-                    System.out.println("Airport codes and distance: ");
+                    System.out.print("Airport codes and distance: ");
                     String[] iataDistance = input.nextLine().split(" ");
                     airportGraph.addEdge(iataDistance[0], iataDistance[1], Double.parseDouble(iataDistance[2])); // TODO add in error handling here
                     System.out.println("You have inserted a flight from " + airportDict.getValue(iataDistance[0]) + " to " + airportDict.getValue(iataDistance[1]) + " with a distance of " + iataDistance[2] + ".");
                     break;
                 case "R":
-                    System.out.println("Airport codes: ");
+                    System.out.print("Airport codes: ");
                     String[] iatasRemove = input.nextLine().split(" ");
                     airportGraph.removeEdge(iatasRemove[0], iatasRemove[1]); // TODO: Error handling
                     System.out.println("The connection from " + airportDict.getValue(iatasRemove[0]) + " to " + airportDict.getValue(iatasRemove[1]) + " removed.");
                     break;
             }
-            System.out.println("Command? ");
+            System.out.print("Command? ");
             command = input.nextLine();
         }
     }
