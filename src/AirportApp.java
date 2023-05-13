@@ -50,12 +50,8 @@ public class AirportApp {
 
         airports.close();
         distances.close();
-
+        
         System.out.println("Airports v0.1 by T. Shah");
-
-
-        // TODO validate input of IATA codes
-        // TODO: check new route for negative value
         System.out.print("Command? ");
         String command = input.nextLine();
         while (!command.equals("E")) {
@@ -73,17 +69,17 @@ public class AirportApp {
                     String iata = input.nextLine();
                     
                     String airportName = airportDict.getValue(iata.toUpperCase());
-                    if (airportName != null) {
-                        System.out.println("Airport information: " + airportName);
+                    if (airportName == null) {
+                        System.out.println("Airport code unknown, " + iata.toUpperCase() + " not found.");
                     } else {
-                        System.out.println("Airport IATA " + iata.toUpperCase() + " not found.");
+                        System.out.println("Airport information: " + airportName);
                     }
                     break;
                 case "D":
                     System.out.print("Airport codes: ");
                     String[] iatas = input.nextLine().split(" ");
-                    if (airportDict.getValue(iatas[0].toUpperCase()) == null || airportDict.getValue(iatas[1].toUpperCase()) == null) {
-                        System.out.println("One or more of the airports does not exist.");
+                    if (iatas.length != 2 || airportDict.getValue(iatas[0].toUpperCase()) == null || airportDict.getValue(iatas[1].toUpperCase()) == null) {
+                        System.out.println("Airport code unknown, one or more of the airports does not exist.");
                     } else {
                         StackInterface<String> path = new LinkedStack<>();
                         Double cost = airportGraph.getCheapestPath(iatas[0], iatas[1], path);
@@ -102,7 +98,7 @@ public class AirportApp {
                     System.out.print("Airport codes and distance: ");
                     String[] iataDistance = input.nextLine().split(" ");
                     if (iataDistance.length != 3 || airportDict.getValue(iataDistance[0]) == null || airportDict.getValue(iataDistance[1]) == null || Double.parseDouble(iataDistance[2]) < 0) {
-                        System.out.println("Invalid edge input.");
+                        System.out.println("Airport code unknown, invalid edge input.");
                     } else {
                         if (!airportGraph.hasEdge(iataDistance[0], iataDistance[1])) {
                             airportGraph.addEdge(iataDistance[0], iataDistance[1], Double.parseDouble(iataDistance[2])); // TODO add in error handling here
@@ -116,16 +112,18 @@ public class AirportApp {
                     System.out.print("Airport codes: ");
                     String[] iatasRemove = input.nextLine().split(" ");
                     if (iatasRemove.length != 2 || airportDict.getValue(iatasRemove[0]) == null || airportDict.getValue(iatasRemove[1]) == null) {
-                        System.out.println("One or more of the airport IATAs does not exist.");
+                        System.out.println("Airport code unknown, one or more of the airport IATAs does not exist.");
                     } else {
                         if (airportGraph.hasEdge(iatasRemove[0], iatasRemove[1])) {
                             airportGraph.removeEdge(iatasRemove[0], iatasRemove[1]); // TODO: Error handling
-                            System.out.println("The connection from " + airportDict.getValue(iatasRemove[0]) + " to " + airportDict.getValue(iatasRemove[1]) + " removed.");
+                            System.out.println("The connection from " + airportDict.getValue(iatasRemove[0]) + " to " + airportDict.getValue(iatasRemove[1]) + " has been removed.");
                         } else {
-                            System.out.println("Skipping removal, the connection from " + airportDict.getValue(iatasRemove[0]) + " to " + airportDict.getValue(iatasRemove[1]) + " does not exist.");
+                            System.out.println("Airports not connected, the connection from " + airportDict.getValue(iatasRemove[0]) + " to " + airportDict.getValue(iatasRemove[1]) + " does not exist.");
                         }
                     }
                     break;
+                default:
+                    System.out.println("Invalid Command");
             }
             System.out.print("Command? ");
             command = input.nextLine();
